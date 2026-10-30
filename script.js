@@ -1,5 +1,68 @@
-document.getElementById('year').textContent=new Date().getFullYear();
-const menu=document.querySelector('.menu-toggle'),nav=document.getElementById('nav');menu.addEventListener('click',()=>{const expanded=menu.getAttribute('aria-expanded')==='true';menu.setAttribute('aria-expanded',String(!expanded));nav.classList.toggle('open',!expanded)});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false')}));
-const discourseUrl=''; // Replace with the full URL of your Discourse forum, e.g. https://talk.example.com
-if(discourseUrl){const l=document.getElementById('discourse-link');l.href=discourseUrl;l.removeAttribute('aria-disabled');l.textContent='Join the conversation ↗';}
-document.getElementById('guest-form').addEventListener('submit',e=>{e.preventDefault();const f=e.currentTarget;if(!f.reportValidity())return;const v=id=>document.getElementById(id).value.trim();const text=`BIGGER WORLDS — GUEST NOMINATION\n\nName: ${v('name')}\nEmail: ${v('email')}\n\nAbout me:\n${v('story')}\n\nI would love to talk about:\n${v('topic')}\n\nWebsite/social: ${v('link')||'Not supplied'}\n\nPermission to contact: Yes`;document.getElementById('copy-text').value=text;document.getElementById('copy-result').hidden=false;document.getElementById('form-status').textContent='Nomination prepared below. It has NOT been sent.';document.getElementById('copy-result').scrollIntoView({behavior:'smooth',block:'start'});});document.getElementById('copy-button').addEventListener('click',async()=>{const content=document.getElementById('copy-text').value;try{await navigator.clipboard.writeText(content);document.getElementById('copy-button').textContent='Copied!';}catch{document.getElementById('copy-text').select();document.getElementById('copy-button').textContent='Select and copy the text above';}});
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Mobile navigation
+const menu = document.querySelector('.menu-toggle');
+const nav = document.getElementById('nav');
+
+menu.addEventListener('click', () => {
+  const expanded = menu.getAttribute('aria-expanded') === 'true';
+  menu.setAttribute('aria-expanded', String(!expanded));
+  nav.classList.toggle('open', !expanded);
+});
+
+nav.querySelectorAll('a').forEach(a =>
+  a.addEventListener('click', () => {
+    nav.classList.remove('open');
+    menu.setAttribute('aria-expanded', 'false');
+  })
+);
+
+// Discourse community — connect when ready
+const discourseUrl = '';
+
+if (discourseUrl) {
+  const link = document.getElementById('discourse-link');
+  link.href = discourseUrl;
+  link.removeAttribute('aria-disabled');
+  link.textContent = 'Join the conversation ↗';
+}
+
+// Bigger Worlds guest submissions — Formspree
+const guestForm = document.getElementById('guest-form');
+const formStatus = document.getElementById('form-status');
+const submitButton = guestForm.querySelector('button[type="submit"]');
+
+guestForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  if (!guestForm.reportValidity()) return;
+
+  submitButton.disabled = true;
+  submitButton.textContent = 'Sending...';
+  formStatus.textContent = 'Sending your story...';
+
+  try {
+    const response = await fetch(guestForm.action, {
+      method: 'POST',
+      body: new FormData(guestForm),
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Formspree submission failed');
+    }
+
+    guestForm.reset();
+    formStatus.textContent =
+      'Thank you! Your story has been submitted successfully.';
+  } catch (error) {
+    formStatus.textContent =
+      'Your story could not be sent. Please try again.';
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = 'Send my story ↗';
+  }
+});
