@@ -11,3 +11,15 @@
 .pixie-copy blockquote{font:700 clamp(25px,3.2vw,46px)/1.22 Fraunces,Georgia,serif;margin:35px 0 20px;color:#fff1d8}
 .pixie-note{font-size:15px;opacity:.78;font-style:italic}
 @media(max-width:880px){.pixie-section{grid-template-columns:1fr}.pixie-photo{min-height:0;max-height:460px}.pixie-photo img{max-height:460px;object-position:center 44%}.pixie-copy{padding:45px 7vw 55px}}
+
+/* Understated professional context, contained within the existing About section. */
+.about{row-gap:32px}
+.community-builder{grid-column:1 / -1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 10%;border-top:1px solid #ffffff2c;padding-top:30px;margin-top:18px}
+.community-builder .kicker{color:#eeb9cb;font-size:12px;line-height:1.6;max-width:380px}
+.community-builder h3{font-size:clamp(28px,3vw,42px);margin:12px 0 0;line-height:1.15}
+.community-builder-copy p{font-size:16px;line-height:1.75;margin:0 0 16px;max-width:650px}
+.community-builder .text-link{display:inline-block;font-size:12px;line-height:1.8;letter-spacing:.06em;border-bottom:1px solid #ffffff70;margin-top:4px}
+.community-builder .text-link:hover{border-bottom-color:var(--gold);color:var(--gold)}
+.footer-work{text-decoration:underline;text-underline-offset:4px;text-decoration-color:#e0d4db66}
+.footer-work:hover{color:var(--paper);text-decoration-color:currentColor}
+@media(max-width:880px){.community-builder{grid-template-columns:1fr;gap:20px;margin-top:20px}.community-builder h3{margin-bottom:0}}
