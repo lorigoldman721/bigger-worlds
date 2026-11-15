@@ -15,10 +15,10 @@
 /* Understated professional context, contained within the existing About section. */
 .about{row-gap:32px}
 .community-builder{grid-column:1 / -1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 10%;border-top:1px solid #ffffff2c;padding-top:30px;margin-top:18px}
-.community-builder .kicker{color:#eeb9cb;font-size:12px;line-height:1.6;max-width:380px}
-.community-builder h3{font-size:clamp(28px,3vw,42px);margin:12px 0 0;line-height:1.15}
-.community-builder-copy p{font-size:16px;line-height:1.75;margin:0 0 16px;max-width:650px}
-.community-builder .text-link{display:inline-block;font-size:12px;line-height:1.8;letter-spacing:.06em;border-bottom:1px solid #ffffff70;margin-top:4px}
+.community-builder .kicker{color:#eeb9cb;max-width:380px}
+.community-builder h3{margin:12px 0 0}
+.community-builder-copy p{margin:0 0 16px;max-width:650px}
+.community-builder .text-link{display:inline-block;border-bottom:1px solid #ffffff70;margin-top:4px}
 .community-builder .text-link:hover{border-bottom-color:var(--gold);color:var(--gold)}
 .footer-work{text-decoration:underline;text-underline-offset:4px;text-decoration-color:#e0d4db66}
 .footer-work:hover{color:var(--paper);text-decoration-color:currentColor}
